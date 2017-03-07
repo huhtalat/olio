@@ -1,0 +1,130 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace YksikkoTestausDemo
+{
+    interface ICalculator
+    {
+        int Add(int numero1, int numero2);
+        int Multiply(int numero1, int numero2);
+    }
+    //luokka joka toteuttaa ICalculator-rajapinnan
+    public class Calculator : ICalculator
+    {
+        public int Add(int numero1, int numero2)
+        {
+            return numero1 + numero2;
+        }
+        public int Multiply(int numero1, int numero2)
+        {
+            return numero1 * numero2;
+        }
+        public int Subtract(int numero1, int numero2)
+        {
+            return numero1 - numero2;
+        }
+        public int Divide(int numero1, int numero2)
+        {
+            return numero1 / numero2;
+        }
+    }
+    class TestiPeti
+    {
+        static void Main(string[] args)
+        {
+            //kokeillaan luokkaa Calculator
+            Calculator laskin = new YksikkoTestausDemo.Calculator();
+            int tulos = laskin.Add(10, 20);
+            Console.WriteLine("yhteenlaskun 10+20 tulos on:" + tulos);
+        }
+    }
+}
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using YksikkoTestausDemo;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace YksikkoTestausDemo.Tests
+{
+    [TestClass()]
+    public class CalculatorTests
+    {
+        [TestMethod()]
+        public void AddTest()
+        {
+            //AAA-periaate
+            //arrange = alustamista, valmistelua
+            Calculator calc = new Calculator();
+            int n1 = 5;
+            int n2 = 8;
+            int expected = 13;
+            //act=toimi
+            int actual = calc.Add(n1, n2);
+            //assert=tarkistus
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void AddTestZero()
+        {
+            //AAA-periaate
+            //arrange = alustamista, valmistelua
+            Calculator calc = new Calculator();
+            int n1 = 0;
+            int n2 = 0;
+            int expected = 0;
+            //act=toimi
+            int actual = calc.Add(n1, n2);
+            //assert=tarkistus
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod()]
+        public void MultiplyTest()
+        {
+            //AAA-periaate
+            //arrange = alustamista, valmistelua
+            Calculator calc = new Calculator();
+            int n1 = 5;
+            int n2 = 8;
+            int expected = 40;
+            //act=toimi
+            int actual = calc.Multiply(n1, n2);
+            //assert=tarkistus
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod()]
+        public void SubtractTest()
+        {
+            //AAA-periaate
+            //arrange = alustamista, valmistelua
+            Calculator calc = new Calculator();
+            int n1 = 40;
+            int n2 = 10;
+            int expected = 30;
+            //act=toimi
+            int actual = calc.Subtract(n1, n2);
+            //assert=tarkistus
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod()]
+        public void DivideTest()
+        {
+            //AAA-periaate
+            //arrange = alustamista, valmistelua
+            Calculator calc = new Calculator();
+            int n1 = 40;
+            int n2 = 10;
+            int expected = 4;
+            //act=toimi
+            int actual = calc.Divide(n1, n2);
+            //assert=tarkistus
+            Assert.AreEqual(expected, actual);
+        }
+    }
+}
